@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class HeroController : MonoBehaviour
 {
-    [SerializeField] protected float _attackRange;
+    [SerializeField] protected float _attackRange, _minAttackCooldown, _maxAttackCooldown;
     [SerializeField] protected LayerMask _enemyLayer;
-    [SerializeField] protected float _attackCooldown;
     [SerializeField] protected Transform _attackPoint;
     protected Vector2 _direction;
 
@@ -36,7 +35,7 @@ public class HeroController : MonoBehaviour
             if (_cooldown <= 0 && IsTargetInRange())
             {
                 Attack();
-                _cooldown = _attackCooldown;
+                SetCooldown();
             }
             else if (!IsTargetInRange()) RemoveTarget();
         }
@@ -48,7 +47,11 @@ public class HeroController : MonoBehaviour
     {
         if (_cooldown > 0) _cooldown -= Time.deltaTime;
     }
-
+    void SetCooldown()
+    {
+        var cooldown = Random.Range(_minAttackCooldown, _maxAttackCooldown);
+        _cooldown = cooldown;
+    }
     bool IsTargetInRange()
     {
         var distance = Vector2.Distance(Transform.position, _enemyTarget.transform.position);

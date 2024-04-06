@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SlashController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] int _damage;
+    [SerializeField] float _lifeTime;
+    [SerializeField] float _skillAngle;
+    public void Spawn(LayerMask enemyMask, float range)
     {
-        
+        var enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
+        foreach (var enemy in enemies)
+        {
+            var direction = enemy.transform.position - transform.position;
+            if (Vector2.Angle(transform.up, direction) < _skillAngle / 2) enemy.GetComponent<EnemyController>().TakeDamage(_damage);
+        }
+        Invoke(nameof(Deactive), _lifeTime);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Deactive() => gameObject.SetActive(false);
 }
