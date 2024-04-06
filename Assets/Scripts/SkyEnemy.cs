@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class SkyEnemy : EnemyController
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Move()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Move();
+        var direction = (_thronePlace.position - Transform.position).normalized;
+        Transform.Translate(_moveSpeed * direction);
+        Flip(direction.x);
     }
 }

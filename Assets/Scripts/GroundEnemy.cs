@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundEnemy : EnemyController
 {
-    // Start is called before the first frame update
-    void Start()
+    int _pathTarget;
+    protected override void OnEnable()
     {
-        
+        base.OnEnable();
+        _pathTarget = 0;
     }
-
-    // Update is called once per frame
-    void Update()
+    protected override void Move()
     {
-        
+        base.Move();
+        var direction = (_groundPath[_pathTarget].position - Transform.position).normalized;
+        Transform.Translate(_moveSpeed * direction);
+        Flip(direction.x);
+
+        var distance = Vector2.Distance(Transform.position, _groundPath[_pathTarget].position);
+        if (distance <= .1) _pathTarget++;
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] Transform[] _groundSpawnPoints, _skySpawnPoints;
+    [SerializeField] Transform[] _groundSpawnPoints, _skySpawnPoints, _groundPath;
     [SerializeField] SpawningPattern[] _phases;
     [SerializeField] Transform _enemyPool;
 
@@ -16,15 +16,17 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public Queue<GroundEnemy> GroundEnemies = new();
     [HideInInspector] public Queue<SkyEnemy> SkyEnemies = new();
 
+    public event Action ON_GAME_OVER;
     public Transform[] GroundSpawnPoints => _groundSpawnPoints;
     public Transform[] SkySpawnPoints => _skySpawnPoints;
+    public Transform[] GroundPath => _groundPath;
     float _timeToSpawn;
     void Start()
     {
-        
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
     }
 
-    
     void Update()
     {
         SpawnEnemy(_timeToSpawn);
@@ -55,6 +57,11 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     public void ResetSpawnTime() => _timeToSpawn = 0;
+
+    public void FireGameOver()
+    {
+        ON_GAME_OVER?.Invoke();
+    }
 }
 
 [Serializable]
