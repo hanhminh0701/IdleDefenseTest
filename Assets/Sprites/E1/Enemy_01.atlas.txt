@@ -1,0 +1,146 @@
+
+Enemy_01.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body_11
+  rotate: false
+  xy: 122, 30
+  size: 113, 141
+  orig: 113, 141
+  offset: 0, 0
+  index: -1
+E1_Hit
+  rotate: true
+  xy: 2, 18
+  size: 153, 118
+  orig: 153, 118
+  offset: 0, 0
+  index: -1
+Ef_Atk_11
+  rotate: true
+  xy: 2, 173
+  size: 337, 245
+  orig: 337, 245
+  offset: 0, 0
+  index: -1
+Ef_Atk_12
+  rotate: false
+  xy: 237, 32
+  size: 337, 139
+  orig: 337, 139
+  offset: 0, 0
+  index: -1
+Hair_11
+  rotate: true
+  xy: 486, 336
+  size: 174, 97
+  orig: 174, 97
+  offset: 0, 0
+  index: -1
+Head_11
+  rotate: true
+  xy: 249, 221
+  size: 289, 235
+  orig: 289, 235
+  offset: 0, 0
+  index: -1
+L_Arm_11
+  rotate: false
+  xy: 486, 177
+  size: 56, 63
+  orig: 56, 63
+  offset: 0, 0
+  index: -1
+L_Eye_11
+  rotate: true
+  xy: 249, 177
+  size: 42, 51
+  orig: 42, 51
+  offset: 0, 0
+  index: -1
+L_Eyebrow_11
+  rotate: false
+  xy: 585, 441
+  size: 56, 69
+  orig: 56, 69
+  offset: 0, 0
+  index: -1
+L_Hand_11
+  rotate: false
+  xy: 576, 93
+  size: 76, 82
+  orig: 76, 82
+  offset: 0, 0
+  index: -1
+L_Leg_11
+  rotate: true
+  xy: 602, 182
+  size: 62, 71
+  orig: 62, 71
+  offset: 0, 0
+  index: -1
+L_Leg_12
+  rotate: true
+  xy: 237, 2
+  size: 28, 36
+  orig: 28, 36
+  offset: 0, 0
+  index: -1
+R_Leg_12
+  rotate: true
+  xy: 237, 2
+  size: 28, 36
+  orig: 28, 36
+  offset: 0, 0
+  index: -1
+L_Shoe_11
+  rotate: false
+  xy: 122, 2
+  size: 45, 26
+  orig: 45, 26
+  offset: 0, 0
+  index: -1
+R_Arm
+  rotate: false
+  xy: 544, 177
+  size: 56, 63
+  orig: 56, 63
+  offset: 0, 0
+  index: -1
+R_Eye_11
+  rotate: true
+  xy: 585, 378
+  size: 61, 55
+  orig: 61, 55
+  offset: 0, 0
+  index: -1
+R_Eyebrow_11
+  rotate: true
+  xy: 565, 246
+  size: 88, 73
+  orig: 88, 73
+  offset: 0, 0
+  index: -1
+R_Hand_11
+  rotate: false
+  xy: 486, 242
+  size: 77, 92
+  orig: 77, 92
+  offset: 0, 0
+  index: -1
+R_Leg_11
+  rotate: false
+  xy: 576, 11
+  size: 76, 80
+  orig: 76, 80
+  offset: 0, 0
+  index: -1
+R_Shoe_11
+  rotate: false
+  xy: 169, 2
+  size: 45, 26
+  orig: 45, 26
+  offset: 0, 0
+  index: -1
