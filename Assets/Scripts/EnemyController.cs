@@ -13,54 +13,60 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected int _maxLife;
     [SerializeField] protected HealthBarController _healthBarPrefab;
+    [SerializeField] protected Transform _healthBarPlace;
+
     HealthBarController _healthBar;
     bool _isDead;
     public Transform Transform => transform;
     int _currentLife;
-    bool _isFaceingLeft;
+    protected bool _isFaceingLeft;
+
     protected Transform[] _groundPath => GameManager.Instance.GroundPath;
     protected Transform _thronePlace => GameManager.Instance.GroundPath.Last();
+    public Transform HealthBarPlace => _healthBarPlace;
 
     const string _moveState = "move";
     const string _dieState = "die";
     const string _idleState = "idle";
 
-    protected virtual void OnEnable() => GameManager.Instance.ON_GAME_OVER += OnGameOver;
-    protected virtual void OnDisable() => GameManager.Instance.ON_GAME_OVER -= OnGameOver;
+    //protected virtual void OnEnable() => GameManager.Instance.ON_GAME_OVER += OnGameOver;
+    //protected virtual void OnDisable() => GameManager.Instance.ON_GAME_OVER -= OnGameOver;
 
+    void Start() => SwitchToState(_moveState);
     private void Update()
     {
         if (_isDead) return;
         Move();
+        if (Input.GetMouseButtonDown(1)) Die();
     }
 
     public void Init()
     {
-        _healthBar = Instantiate(_healthBarPrefab, GameManager.Instance.Canvas);
-        _healthBar.Init(this);
+        //_healthBar = Instantiate(_healthBarPrefab, GameManager.Instance.Canvas);
+        //_healthBar.Init(this);
     }
     public void Respawn(Vector2 position)
     {
         _isDead = false;
         _currentLife = _maxLife;
-        UPDATE_HEALTH_BAR?.Invoke((float)_currentLife / _maxLife);
+        //UPDATE_HEALTH_BAR?.Invoke((float)_currentLife / _maxLife);
         transform.position = position;
         gameObject.SetActive(true);
-        _healthBar.gameObject.SetActive(true);
+        //_healthBar.gameObject.SetActive(true);
     }
 
-    protected virtual void Move() => SwitchToState(_moveState);
+    protected virtual void Move() { }
     protected void Flip(float directionX)
     {
         if (directionX > 0 && _isFaceingLeft) 
         {
             _isFaceingLeft = !_isFaceingLeft;
-            Transform.Rotate(0, 180, 0);
+            _anim.transform.Rotate(0, 180, 0);
         }
         else if (directionX < 0 && !_isFaceingLeft)
         {
             _isFaceingLeft = !_isFaceingLeft;
-            Transform.Rotate(0, 180, 0);
+            _anim.transform.Rotate(0, 180, 0);
         }
     }
 

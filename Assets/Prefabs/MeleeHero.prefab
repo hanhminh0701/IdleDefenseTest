@@ -144,6 +144,7 @@ MonoBehaviour:
     m_Bits: 64
   _attackPoint: {fileID: 7332657352973807485}
   _slash: {fileID: 1710176035851735115}
+  _skillDelayTime: 0.7
 --- !u!1 &4786528025043474827
 GameObject:
   m_ObjectHideFlags: 0

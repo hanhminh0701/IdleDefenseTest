@@ -13,18 +13,19 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] SkyEnemy _skyEnemyPrefab;
     [SerializeField] Transform _canvas;
 
+    public ThroneHealth Throne;
+
     [HideInInspector] public Queue<GroundEnemy> GroundEnemies = new();
     [HideInInspector] public Queue<SkyEnemy> SkyEnemies = new();
     [HideInInspector] public Queue<BulletController> Bullets = new();
 
     public event Action ON_GAME_OVER;
-    public Transform[] GroundSpawnPoints => _groundSpawnPoints;
-    public Transform[] SkySpawnPoints => _skySpawnPoints;
     public Transform[] GroundPath => _groundPath;
     public Transform Canvas => _canvas;
     public Transform BulletPool => _bulletPool;
 
     float _timeToSpawn;
+    int _phaseCount;
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -33,25 +34,59 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Update()
     {
-        SpawnEnemy(_timeToSpawn);
+        StartSpawnEnemy(_timeToSpawn);
         _timeToSpawn += Time.deltaTime;
     }
 
-    void SpawnEnemy(float time)
+    void StartSpawnEnemy(float time)
     {
-        var phase = _phases.FirstOrDefault(p => p.TimeToSpawn == time);
-        phase?.SpawnEnemy();
+        if (time >= _phases[_phaseCount].TimeToSpawn)
+        {
+            SpawnEnemy(_phases[_phaseCount]);
+            _timeToSpawn = 0;
+            _phaseCount++;            
+            if (_phaseCount >= _phases.Length) _phaseCount = 0; 
+        }
     }
 
-    public GroundEnemy GetGroundEnemy(Vector2 position)
+    void SpawnEnemy(SpawningPattern phase)
+    {
+        int startPointIndex;
+        
+        if (phase.Type == EnemyType.Ground)
+        {
+            startPointIndex = UnityEngine.Random.Range(0, _groundSpawnPoints.Length);
+            for (int i = 0; i < phase.Amount; i++)
+            {
+                GetGroundEnemy(_groundSpawnPoints[startPointIndex].position);
+                startPointIndex++;
+                if (startPointIndex >= _groundSpawnPoints.Length) startPointIndex = 0;
+            }
+        }
+        else if (phase.Type == EnemyType.Sky)
+        {
+            startPointIndex = UnityEngine.Random.Range(0, _skySpawnPoints.Length);
+            for (int i = 0; i < phase.Amount; i++)
+            {
+                GetSkyEnemy(_skySpawnPoints[startPointIndex].position);
+                startPointIndex++;
+                if (startPointIndex >= _skySpawnPoints.Length) startPointIndex = 0;
+            }
+        }
+    }
+    void GetGroundEnemy(Vector2 position)
     {
         GroundEnemy enemy;
         if (GroundEnemies.Count > 0) enemy = GroundEnemies.Dequeue();
-        else enemy = Instantiate(_groundEnemyPrefab, _enemyPool);
+        else
+        {
+            enemy = Instantiate(_groundEnemyPrefab, _enemyPool);
+            enemy.Init();
+        }
         enemy.Respawn(position);
-        return enemy;
+        //return enemy;
     }
-    public SkyEnemy GetSkyEnemy(Vector2 position)
+    SkyEnemy GetSkyEnemy(Vector2 position)
     {
         SkyEnemy enemy;
         if (GroundEnemies.Count > 0) enemy = SkyEnemies.Dequeue();
@@ -74,33 +109,5 @@ public class SpawningPattern
     public float TimeToSpawn;
     public EnemyType Type;
     public int Amount;
-
-    public void SpawnEnemy()
-    {
-        int spawnPointIndex;
-        if (Type == EnemyType.Ground)
-        {
-            var spawnPoints = GameManager.Instance.GroundSpawnPoints;
-            spawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
-            for (int i = 0; i < Amount; i++)
-            {
-                GameManager.Instance.GetGroundEnemy(spawnPoints[spawnPointIndex].position);
-                spawnPointIndex++;
-                if (spawnPointIndex >= spawnPoints.Length) spawnPointIndex = 0;
-            }
-        }
-        else if (Type == EnemyType.Sky)
-        {
-            var spawnPoints = GameManager.Instance.SkySpawnPoints;
-            spawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
-            for (int i = 0; i < Amount; i++)
-            {
-                GameManager.Instance.GetSkyEnemy(spawnPoints[spawnPointIndex].position);
-                spawnPointIndex++;
-                if (spawnPointIndex >= spawnPoints.Length) spawnPointIndex = 0;
-            }
-        }
-        else GameManager.Instance.ResetSpawnTime();
-    }
 }
 public enum EnemyType { None, Ground, Sky}

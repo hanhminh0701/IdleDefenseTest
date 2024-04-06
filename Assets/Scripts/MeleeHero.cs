@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeHero : HeroController
@@ -9,7 +8,7 @@ public class MeleeHero : HeroController
     protected override void Attack()
     {
         base.Attack();
-       StartCoroutine(SpawnSkill(_enemyLayer, _attackRange));
+        StartCoroutine(SpawnSkill(_enemyLayer, _attackRange));
     }
 
     IEnumerator SpawnSkill(LayerMask enemy, float range)

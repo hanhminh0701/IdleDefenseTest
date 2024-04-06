@@ -5,6 +5,8 @@ public class SlashController : MonoBehaviour
     [SerializeField] int _damage;
     [SerializeField] float _lifeTime;
     [SerializeField] float _skillAngle;
+
+    private void Start() => gameObject.SetActive(false);
     public void Spawn(LayerMask enemyMask, float range)
     {
         var enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);

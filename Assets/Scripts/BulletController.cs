@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] float _lifeTime;
     Vector2 _direction;
 
+    private void Start() => gameObject.SetActive(false);
     private void OnEnable() => Invoke(nameof(Deactive), 3);
 
     private void OnDisable() => GameManager.Instance.Bullets.Enqueue(this);

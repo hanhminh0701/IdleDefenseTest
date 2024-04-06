@@ -41,7 +41,7 @@ public class HeroController : MonoBehaviour
         }
     }
 
-    protected virtual void Attack() => _direction = _enemyTarget.transform.position - Transform.position;
+    protected virtual void Attack() => _direction = _enemyTarget.Transform.position - Transform.position;
 
     void CooldownAttack()
     {
@@ -54,7 +54,7 @@ public class HeroController : MonoBehaviour
     }
     bool IsTargetInRange()
     {
-        var distance = Vector2.Distance(Transform.position, _enemyTarget.transform.position);
+        var distance = Vector2.Distance(Transform.position, _enemyTarget.Transform.position);
         return distance <= _attackRange;
     }
 
