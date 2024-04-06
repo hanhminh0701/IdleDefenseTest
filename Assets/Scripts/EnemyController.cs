@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-using UnityEngine.UI;
-using UnityEngine.Scripting.APIUpdating;
 using System.Linq;
+using System;
 
 public class EnemyController : MonoBehaviour
 {
+    public event Action<float> UPDATE_HEALTH_BAR;
+    public event Action ON_DEAD;
+
     [SerializeField] protected SkeletonAnimation _anim;
     [SerializeField] protected AnimationReferenceAsset _moving, _die, _idle;
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected int _maxLife;
-    [SerializeField] protected GameObject _healthBar;
-    [SerializeField] protected Image _health;
+    [SerializeField] protected HealthBarController _healthBarPrefab;
+    HealthBarController _healthBar;
     bool _isDead;
-    public bool IsDead => _isDead;
     public Transform Transform => transform;
     int _currentLife;
     bool _isFaceingLeft;
@@ -27,22 +26,27 @@ public class EnemyController : MonoBehaviour
     const string _idleState = "idle";
 
     protected virtual void OnEnable() => GameManager.Instance.ON_GAME_OVER += OnGameOver;
-    protected void OnDisable() => GameManager.Instance.ON_GAME_OVER -= OnGameOver;
+    protected virtual void OnDisable() => GameManager.Instance.ON_GAME_OVER -= OnGameOver;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_isDead) return;
         Move();
-        _healthBar.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+    }
+
+    public void Init()
+    {
+        _healthBar = Instantiate(_healthBarPrefab, GameManager.Instance.Canvas);
+        _healthBar.Init(this);
     }
     public void Respawn(Vector2 position)
     {
         _isDead = false;
         _currentLife = _maxLife;
-        UpdateLife();
+        UPDATE_HEALTH_BAR?.Invoke((float)_currentLife / _maxLife);
         transform.position = position;
         gameObject.SetActive(true);
-        _healthBar.SetActive(true);
+        _healthBar.gameObject.SetActive(true);
     }
 
     protected virtual void Move() => SwitchToState(_moveState);
@@ -70,9 +74,10 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (_healthBar.gameObject.activeSelf) _healthBar.gameObject.SetActive(true);
         _currentLife -= damage;
         if (_currentLife <= 0) Die();
-        else UpdateLife();
+        else UPDATE_HEALTH_BAR?.Invoke((float)_currentLife/_maxLife);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -80,21 +85,18 @@ public class EnemyController : MonoBehaviour
         if (collision.tag == "Throne")
         {
             gameObject.SetActive(false);
-            _healthBar.SetActive(false);
+            _healthBar.gameObject.SetActive(false);
             collision.GetComponent<ThroneHealth>().TakeDamage(1);
         }
     }
 
-    void Die()
+    protected virtual void Die()
     {
         _isDead = true;
+        ON_DEAD?.Invoke();
         SwitchToState(_dieState);
-        Invoke(nameof(Deactive), 2);
-        _healthBar.SetActive(false);
+        _healthBar.gameObject.SetActive(false);
     }
-
-    protected virtual void Deactive() => gameObject.SetActive(false);
-    void UpdateLife() => _health.fillAmount = (float)_currentLife / _maxLife;
 
     void OnGameOver()
     {

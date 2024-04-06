@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -8,18 +7,23 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] Transform[] _groundSpawnPoints, _skySpawnPoints, _groundPath;
     [SerializeField] SpawningPattern[] _phases;
-    [SerializeField] Transform _enemyPool;
+    [SerializeField] Transform _enemyPool, _bulletPool;
 
     [SerializeField] GroundEnemy _groundEnemyPrefab;
     [SerializeField] SkyEnemy _skyEnemyPrefab;
+    [SerializeField] Transform _canvas;
 
     [HideInInspector] public Queue<GroundEnemy> GroundEnemies = new();
     [HideInInspector] public Queue<SkyEnemy> SkyEnemies = new();
+    [HideInInspector] public Queue<BulletController> Bullets = new();
 
     public event Action ON_GAME_OVER;
     public Transform[] GroundSpawnPoints => _groundSpawnPoints;
     public Transform[] SkySpawnPoints => _skySpawnPoints;
     public Transform[] GroundPath => _groundPath;
+    public Transform Canvas => _canvas;
+    public Transform BulletPool => _bulletPool;
+
     float _timeToSpawn;
     void Start()
     {

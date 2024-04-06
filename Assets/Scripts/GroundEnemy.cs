@@ -8,6 +8,12 @@ public class GroundEnemy : EnemyController
         base.OnEnable();
         _pathTarget = 0;
     }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        GameManager.Instance.GroundEnemies.Enqueue(this);
+    }
     protected override void Move()
     {
         base.Move();
@@ -18,4 +24,11 @@ public class GroundEnemy : EnemyController
         var distance = Vector2.Distance(Transform.position, _groundPath[_pathTarget].position);
         if (distance <= .1) _pathTarget++;
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        Invoke(nameof(Deactive), 2);
+    }
+    void Deactive() => gameObject.SetActive(false);
 }

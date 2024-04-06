@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8346530429807680977}
   - component: {fileID: 3685846136914727759}
   - component: {fileID: 157427983283289562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundMob
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1.75}
@@ -157,5 +157,4 @@ MonoBehaviour:
   _idle: {fileID: 11400000, guid: 73254ddad72d95c448aaa7c1aa6a404d, type: 2}
   _moveSpeed: 3
   _maxLife: 3
-  _healthBar: {fileID: 0}
-  _health: {fileID: 0}
+  _healthBarPrefab: {fileID: 0}
