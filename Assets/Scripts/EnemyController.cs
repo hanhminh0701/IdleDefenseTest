@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
     void SwitchToState(string state)
     {
         if (state == _moveState) SetAnim(_moving, true);
-        else if (state == _dieState) SetAnim(_die, false);
+        else if (state == _dieState && _die != null) SetAnim(_die, false);
         else SetAnim(_idle, true);
     }
     void SetAnim(AnimationReferenceAsset anim, bool loop, float timeScale = 1) => _anim.state.SetAnimation(0, anim, loop).TimeScale = timeScale;

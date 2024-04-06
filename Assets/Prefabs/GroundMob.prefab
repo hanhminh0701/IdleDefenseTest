@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8346530429807680979}
   - component: {fileID: 8346530429807680978}
   - component: {fileID: 8346530429807680977}
+  - component: {fileID: 3685846136914727759}
+  - component: {fileID: 157427983283289562}
   m_Layer: 0
   m_Name: GroundMob
   m_TagString: Untagged
@@ -121,3 +123,39 @@ MonoBehaviour:
   _animationName: 
   loop: 1
   timeScale: 1
+--- !u!70 &3685846136914727759
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346530429807680976}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.75}
+  m_Size: {x: 2, y: 3.5}
+  m_Direction: 0
+--- !u!114 &157427983283289562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346530429807680976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742270d307eab9d4fa9ba7fb61f74a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 8346530429807680977}
+  _moving: {fileID: 11400000, guid: bc831e0656f9d964f938c9afc6b19bc4, type: 2}
+  _die: {fileID: 11400000, guid: 8f89a929356584b41bbd7dac035933a9, type: 2}
+  _idle: {fileID: 11400000, guid: 73254ddad72d95c448aaa7c1aa6a404d, type: 2}
+  _moveSpeed: 3
+  _maxLife: 3
+  _healthBar: {fileID: 0}
+  _health: {fileID: 0}

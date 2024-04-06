@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6024509470998071014}
   - component: {fileID: 6024509470998071015}
   - component: {fileID: 6024509470998071008}
+  - component: {fileID: 958315785498867598}
+  - component: {fileID: 38741590751555131}
   m_Layer: 0
   m_Name: SkyMob
   m_TagString: Untagged
@@ -121,3 +123,39 @@ MonoBehaviour:
   _animationName: 
   loop: 1
   timeScale: 1
+--- !u!58 &958315785498867598
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6024509470998071009}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.8654697}
+  serializedVersion: 2
+  m_Radius: 0.9
+--- !u!114 &38741590751555131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6024509470998071009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94349ba54c75a684d93e17c2c46d0671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 6024509470998071008}
+  _moving: {fileID: 11400000, guid: ae0433db270b0704ba8ebd39eabe581c, type: 2}
+  _die: {fileID: 0}
+  _idle: {fileID: 11400000, guid: c77d6a0918a2ec943a480b4f0548cf86, type: 2}
+  _moveSpeed: 3
+  _maxLife: 5
+  _healthBar: {fileID: 0}
+  _health: {fileID: 0}
