@@ -23,17 +23,13 @@ public class EnemyController : MonoBehaviour
     {
         
     }
-
-    private void OnEnable()
+    public void Respawn(Vector2 position)
     {
         isDead = false;
         _currentLife = _maxLife;
         UpdateLife();
-    }
-
-    private void OnDisable()
-    {
-        _healthBar.SetActive(false);
+        transform.position = position;
+        gameObject.SetActive(true);
     }
     void Update()
     {
@@ -59,9 +55,10 @@ public class EnemyController : MonoBehaviour
         isDead = true;
         SwitchToState(_dieState);
         Invoke(nameof(Deactive), 2);
+        _healthBar.SetActive(false);
     }
 
-    void Deactive() => gameObject.SetActive(false);
+    protected virtual void Deactive() => gameObject.SetActive(false);
     void UpdateLife()
     {
         _health.fillAmount = (float)_currentLife / _maxLife;
