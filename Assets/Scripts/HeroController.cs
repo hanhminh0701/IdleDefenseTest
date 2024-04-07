@@ -62,6 +62,14 @@ public class HeroController : MonoBehaviour
             }
         }
     }
+
+    protected virtual void Attack()
+    {
+        _direction = (_enemyTarget.Transform.position - Transform.position).normalized;
+        SwitchToState(_attackState);
+        Invoke(nameof(OnFinishAttack), _attackAnimDuration);
+        Flip(_direction.x);
+    }
     protected void Flip(float directionX)
     {
         if (directionX > 0 && _isFacingLeft)
@@ -74,13 +82,6 @@ public class HeroController : MonoBehaviour
             _isFacingLeft = !_isFacingLeft;
             _anim.transform.Rotate(0, 180, 0);
         }
-    }
-
-    protected virtual void Attack()
-    {
-        _direction = (_enemyTarget.Transform.position - Transform.position).normalized;
-        SwitchToState(_attackState);
-        Invoke(nameof(OnFinishAttack), _attackAnimDuration);
     }
     void OnFinishAttack() => SwitchToState(_idleState);
 
