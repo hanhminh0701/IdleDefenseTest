@@ -58,7 +58,7 @@ public class HeroController : MonoBehaviour
 
     protected virtual void Attack()
     {
-        _direction = _enemyTarget.Transform.position - Transform.position;
+        _direction = (_enemyTarget.Transform.position - Transform.position).normalized;
         SwitchToState(_attackState);
         Invoke(nameof(OnFinishAttack), _attackAnimDuration);
     }
