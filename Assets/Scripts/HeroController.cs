@@ -104,5 +104,5 @@ public class HeroController : MonoBehaviour
 
     private void OnDrawGizmos() => Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
 
-    void OnGameOver() => _isGameOver = true;
+    void OnGameOver() => _isGameOver = true; 
 }
