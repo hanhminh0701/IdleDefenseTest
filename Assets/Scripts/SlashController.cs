@@ -7,13 +7,13 @@ public class SlashController : MonoBehaviour
     [SerializeField] float _skillAngle;
 
     private void Start() => gameObject.SetActive(false);
-    public void Spawn(LayerMask enemyMask, float range)
+    public void Spawn(LayerMask enemyMask, float range, Vector2 mainDirection)
     {
         var enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
         foreach (var enemy in enemies)
         {
             var direction = enemy.transform.position - transform.position;
-            if (Vector2.Angle(transform.up, direction) < _skillAngle / 2) enemy.GetComponent<EnemyController>().TakeDamage(_damage);
+            if (Vector2.Angle(mainDirection, direction) < _skillAngle / 2) enemy.GetComponent<EnemyController>().TakeDamage(_damage);
         }
         Invoke(nameof(Deactive), _lifeTime);
     }

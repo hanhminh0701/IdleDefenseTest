@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ public class RangeHero : HeroController
     protected override void Attack()
     {
         base.Attack();
-        FireBullet();
+        Invoke(nameof(FireBullet), _skillDelayTime);
     }
     void FireBullet()
     {

@@ -3,29 +3,24 @@ using UnityEngine;
 public class GroundEnemy : EnemyController
 {
     int _pathTarget;
-    //protected override void OnEnable()
-    //{
-    //    base.OnEnable();
-    //    _pathTarget = 0;
-    //}
-
-    //protected override void OnDisable()
-    //{
-    //    base.OnDisable();
-    //    GameManager.Instance.GroundEnemies.Enqueue(this);
-    //}
+    public override void Respawn(Vector2 position)
+    {
+        base.Respawn(position);
+        _pathTarget = 0;
+        GetComponent<Collider2D>().enabled = true;
+    }
     protected override void Move()
     {
         base.Move();
+        Transform.position = Vector2.MoveTowards(Transform.position, _groundPath[_pathTarget].position, _moveSpeed * Time.deltaTime);
         var direction = (_groundPath[_pathTarget].position - Transform.position).normalized;
-        Transform.Translate(_moveSpeed * direction * Time.deltaTime);
         Flip(direction.x);
 
         var distance = Vector2.Distance(Transform.position, _groundPath[_pathTarget].position);
         if (distance <= .1) _pathTarget++;
         if (_pathTarget == _groundPath.Length)
         {
-            gameObject.SetActive(false);
+            Deactive();
             GameManager.Instance.Throne.TakeDamage(1);
         }
     }
@@ -34,6 +29,11 @@ public class GroundEnemy : EnemyController
     {
         base.Die();
         Invoke(nameof(Deactive), 2);
+        GetComponent<Collider2D>().enabled = false;
     }
-    void Deactive() => gameObject.SetActive(false);
+    protected override void Deactive()
+    {
+        base.Deactive();
+        GameManager.Instance.GroundEnemies.Enqueue(this);
+    }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5150699996409519414}
   - component: {fileID: 5150699996409519415}
   - component: {fileID: 5150699996409519408}
-  - component: {fileID: 1470441149189518827}
   m_Layer: 6
   m_Name: SkyMob
   m_TagString: Enemy
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5150699996409519409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -82,8 +81,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1852494521
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5150699996409519408
@@ -123,27 +122,6 @@ MonoBehaviour:
   _animationName: 
   loop: 1
   timeScale: 1
---- !u!114 &1470441149189518827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5150699996409519409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94349ba54c75a684d93e17c2c46d0671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anim: {fileID: 5150699996409519408}
-  _moving: {fileID: 11400000, guid: ae0433db270b0704ba8ebd39eabe581c, type: 2}
-  _die: {fileID: 0}
-  _idle: {fileID: 11400000, guid: c77d6a0918a2ec943a480b4f0548cf86, type: 2}
-  _moveSpeed: 1
-  _maxLife: 5
-  _healthBarPrefab: {fileID: 5261843369527994129, guid: da83d8c724260654ea37dd977a7591ca,
-    type: 3}
-  _healthBarPlace: {fileID: 3064560793070559903}
 --- !u!1 &8289292071737047195
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8289292071737047195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.98, z: 0}
+  m_LocalPosition: {x: 0.277, y: 1.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -186,10 +164,10 @@ GameObject:
   - component: {fileID: 7544552523796866513}
   - component: {fileID: 6930760030269376791}
   - component: {fileID: 6124772154657548313}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SkyEnemy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: Enemy
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -240,9 +218,9 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5

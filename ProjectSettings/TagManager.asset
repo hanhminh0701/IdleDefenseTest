@@ -40,6 +40,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2912615245
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Hero
+    uniqueID: 3913381527
+    locked: 0
+  - name: Skill
+    uniqueID: 2095833447
+    locked: 0
+  - name: Sky
+    uniqueID: 2442472775
+    locked: 0
+  - name: Throne
+    uniqueID: 4038382937
     locked: 0

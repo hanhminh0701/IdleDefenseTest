@@ -4,7 +4,6 @@ using UnityEngine;
 public class MeleeHero : HeroController
 {
     [SerializeField] SlashController _slash;
-    [SerializeField] float _skillDelayTime;
     protected override void Attack()
     {
         base.Attack();
@@ -15,7 +14,7 @@ public class MeleeHero : HeroController
     {
         yield return new WaitForSeconds(_skillDelayTime);
         _slash.transform.position = _attackPoint.position;
-        _slash.transform.up = _direction;
-        _slash.Spawn(enemy, range);
+        _slash.gameObject.SetActive(true);
+        _slash.Spawn(enemy, range, _direction);
     }
 }

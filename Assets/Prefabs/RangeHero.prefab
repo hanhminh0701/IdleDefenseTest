@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285257560822136701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -113,8 +113,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -381585769
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6756053934542778091
@@ -166,6 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d775fd7eaef4127478283b86b8f5beff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anim: {fileID: 6756053934542778091}
+  _idle: {fileID: 11400000, guid: 505d8b8b8ee8d4c4da953bbcced5d72d, type: 2}
+  _attack: {fileID: 11400000, guid: 1c22eb6235918e04391e51bc39a989ae, type: 2}
   _attackRange: 5
   _minAttackCooldown: 1
   _maxAttackCooldown: 1
@@ -173,5 +176,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _attackPoint: {fileID: 4457640524564805841}
+  _attackAnimDuration: 0.3333
+  _skillDelayTime: 0.2
   _bulletPrefabs: {fileID: 3417921148957982884, guid: f5c84d2456d942444b91df91bea64c5a,
     type: 3}
