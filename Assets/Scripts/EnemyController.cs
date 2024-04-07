@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     HealthBarController _healthBar;
     bool _isDead;
     int _currentLife;
-    protected bool _isFaceingLeft;
+    protected bool _isFacingLeft;
 
     public bool IsDead => _isDead;
     public Transform Transform => transform;
@@ -65,14 +65,14 @@ public class EnemyController : MonoBehaviour
     protected virtual void Move() { }
     protected void Flip(float directionX)
     {
-        if (directionX > 0 && _isFaceingLeft) 
+        if (directionX > 0 && _isFacingLeft) 
         {
-            _isFaceingLeft = !_isFaceingLeft;
+            _isFacingLeft = !_isFacingLeft;
             _anim.transform.Rotate(0, 180, 0);
         }
-        else if (directionX < 0 && !_isFaceingLeft)
+        else if (directionX < 0 && !_isFacingLeft)
         {
-            _isFaceingLeft = !_isFaceingLeft;
+            _isFacingLeft = !_isFacingLeft;
             _anim.transform.Rotate(0, 180, 0);
         }
     }
@@ -92,6 +92,8 @@ public class EnemyController : MonoBehaviour
         if (_currentLife <= 0) Die();
         else UPDATE_HEALTH_BAR?.Invoke((float)_currentLife/_maxLife);
     }
+
+    public void SetOrderInLayer(int index) => _anim.GetComponent<MeshRenderer>().sortingOrder = index;
 
     protected virtual void Die()
     {

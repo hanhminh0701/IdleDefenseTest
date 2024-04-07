@@ -26,6 +26,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     float _timeToSpawn;
     int _phaseCount;
+    bool _isGameOver;
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -34,6 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Update()
     {
+        if (_isGameOver) return;
         StartSpawnEnemy(_timeToSpawn);
         _timeToSpawn += Time.deltaTime;
     }
@@ -55,7 +57,8 @@ public class GameManager : MonoSingleton<GameManager>
         {
             for (int i = 0; i < phase.Amount; i++)
             {
-                GetGroundEnemy(_groundSpawnPoints[i].position);
+                var sortingIndex = 0 - i;
+                GetGroundEnemy(_groundSpawnPoints[i].position, sortingIndex);
             }
         }
         else if (phase.Type == EnemyType.Sky)
@@ -63,13 +66,14 @@ public class GameManager : MonoSingleton<GameManager>
             var startPointIndex = UnityEngine.Random.Range(0, _skySpawnPoints.Length);
             for (int i = 0; i < phase.Amount; i++)
             {
-                GetSkyEnemy(_skySpawnPoints[startPointIndex].position);
+                var sortingIndex = 0 - i;
+                GetSkyEnemy(_skySpawnPoints[startPointIndex].position, sortingIndex);
                 startPointIndex++;
                 if (startPointIndex >= _skySpawnPoints.Length) startPointIndex = 0;
             }
         }
     }
-    void GetGroundEnemy(Vector2 position)
+    void GetGroundEnemy(Vector2 position, int sortingIndex)
     {
         GroundEnemy enemy;
         if (GroundEnemies.Count > 0) enemy = GroundEnemies.Dequeue();
@@ -78,9 +82,10 @@ public class GameManager : MonoSingleton<GameManager>
             enemy = Instantiate(_groundEnemyPrefab, _enemyPool);
             enemy.Init();
         }
+        enemy.SetOrderInLayer(sortingIndex);
         enemy.Respawn(position);
     }
-    void GetSkyEnemy(Vector2 position)
+    void GetSkyEnemy(Vector2 position, int sortingIndex)
     {
         SkyEnemy enemy;
         if (SkyEnemies.Count > 0) enemy = SkyEnemies.Dequeue();
@@ -89,12 +94,17 @@ public class GameManager : MonoSingleton<GameManager>
             enemy = Instantiate(_skyEnemyPrefab, _enemyPool);
             enemy.Init();
         }
+        enemy.SetOrderInLayer(sortingIndex);
         enemy.Respawn(position);
     }
 
     public void ResetSpawnTime() => _timeToSpawn = 0;
 
-    public void FireGameOver() => ON_GAME_OVER?.Invoke();
+    public void FireGameOver()
+    {
+        ON_GAME_OVER?.Invoke();
+        _isGameOver = true;
+    }
 }
 
 [Serializable]

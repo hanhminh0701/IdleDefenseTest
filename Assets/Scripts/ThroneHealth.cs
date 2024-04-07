@@ -16,7 +16,7 @@ public class ThroneHealth : MonoBehaviour
         if (_life <= 0)
         {
             GameManager.Instance.FireGameOver();
-            AudioManager.Instance.PlaySFX(SFXType.GameOver);
+            AudioManager.Instance.OnGameOver();
         }
     }
 }

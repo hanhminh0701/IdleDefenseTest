@@ -16,6 +16,7 @@ public class HeroController : MonoBehaviour
 
     float _cooldown;
     Transform Transform => transform;
+    bool _isFacingLeft;
     bool _isGameOver;
 
     const string _attackState = "attack";
@@ -44,10 +45,10 @@ public class HeroController : MonoBehaviour
     {
         if (_enemyTarget == null)
         {
-            var enemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
-            if (enemies.Length > 0)
+            var enemies = Physics2D.OverlapCircle(_attackPoint.position, _attackRange, _enemyLayer);
+            if (enemies != null)
             {
-                _enemyTarget = enemies[0].GetComponent<EnemyController>();
+                _enemyTarget = enemies.GetComponent<EnemyController>();
                 _enemyTarget.ON_DEACTIVE += RemoveTarget;
             }
         }
@@ -59,6 +60,19 @@ public class HeroController : MonoBehaviour
                 Attack();
                 SetCooldown();
             }
+        }
+    }
+    protected void Flip(float directionX)
+    {
+        if (directionX > 0 && _isFacingLeft)
+        {
+            _isFacingLeft = !_isFacingLeft;
+            _anim.transform.Rotate(0, 180, 0);
+        }
+        else if (directionX < 0 && !_isFacingLeft)
+        {
+            _isFacingLeft = !_isFacingLeft;
+            _anim.transform.Rotate(0, 180, 0);
         }
     }
 
