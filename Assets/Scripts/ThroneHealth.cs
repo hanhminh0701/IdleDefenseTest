@@ -12,6 +12,11 @@ public class ThroneHealth : MonoBehaviour
     {
         _life -= damage;
         _health.fillAmount = (float)_life/_maxLife;
-        if (_life <= 0) GameManager.Instance.FireGameOver(); 
+        AudioManager.Instance.PlaySFX(SFXType.Throne);
+        if (_life <= 0)
+        {
+            GameManager.Instance.FireGameOver();
+            AudioManager.Instance.PlaySFX(SFXType.GameOver);
+        }
     }
 }

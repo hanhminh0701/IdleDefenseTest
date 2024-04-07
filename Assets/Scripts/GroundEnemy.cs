@@ -30,6 +30,7 @@ public class GroundEnemy : EnemyController
         base.Die();
         Invoke(nameof(Deactive), 2);
         GetComponent<Collider2D>().enabled = false;
+        AudioManager.Instance.PlaySFX(SFXType.GroundEnemy);
     }
     protected override void Deactive()
     {

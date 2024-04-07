@@ -20,6 +20,7 @@ public class SkyEnemy : EnemyController
     {
         base.Die();
         Deactive();
+        AudioManager.Instance.PlaySFX(SFXType.SkyEnemy);
     }
 
     protected override void Deactive()

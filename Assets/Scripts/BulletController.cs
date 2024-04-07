@@ -37,6 +37,7 @@ public class BulletController : MonoBehaviour
             enemy.TakeDamage(_damage);
             Deactive();
             CancelInvoke(nameof(Deactive));
+            AudioManager.Instance.PlaySFX(SFXType.Bullet);
         }
     }
 

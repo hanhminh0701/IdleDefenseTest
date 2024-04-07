@@ -8,6 +8,7 @@ public class MeleeHero : HeroController
     {
         base.Attack();
         StartCoroutine(SpawnSkill(_enemyLayer, _attackRange));
+        AudioManager.Instance.PlaySFX(SFXType.Slash);
     }
 
     IEnumerator SpawnSkill(LayerMask enemy, float range)

@@ -16,13 +16,19 @@ public class HeroController : MonoBehaviour
 
     float _cooldown;
     Transform Transform => transform;
+    bool _isGameOver;
 
     const string _attackState = "attack";
     const string _idleState = "idle";
 
-    private void Start() => SwitchToState(_idleState);
+    private void Start()
+    {
+        SwitchToState(_idleState);
+        GameManager.Instance.ON_GAME_OVER += OnGameOver;
+    }
     void Update()
     {
+        if (_isGameOver) return;
         CheckEnemy();
         CooldownAttack();
     }
@@ -81,8 +87,7 @@ public class HeroController : MonoBehaviour
         _enemyTarget = null;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
-    }
+    private void OnDrawGizmos() => Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
+
+    void OnGameOver() => _isGameOver = true;
 }

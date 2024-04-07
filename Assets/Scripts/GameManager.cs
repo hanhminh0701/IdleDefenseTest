@@ -94,10 +94,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void ResetSpawnTime() => _timeToSpawn = 0;
 
-    public void FireGameOver()
-    {
-        ON_GAME_OVER?.Invoke();
-    }
+    public void FireGameOver() => ON_GAME_OVER?.Invoke();
 }
 
 [Serializable]
