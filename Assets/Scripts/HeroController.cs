@@ -45,10 +45,10 @@ public class HeroController : MonoBehaviour
     {
         if (_enemyTarget == null)
         {
-            var enemies = Physics2D.OverlapCircle(_attackPoint.position, _attackRange, _enemyLayer);
-            if (enemies != null)
+            var enemie = Physics2D.OverlapCircle(_attackPoint.position, _attackRange, _enemyLayer);
+            if (enemie != null)
             {
-                _enemyTarget = enemies.GetComponent<EnemyController>();
+                _enemyTarget = enemie.GetComponent<EnemyController>();
                 _enemyTarget.ON_DEACTIVE += RemoveTarget;
             }
         }
