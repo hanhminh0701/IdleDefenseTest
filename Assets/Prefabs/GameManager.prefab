@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9048947657044004223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9048947657044004209}
+  - component: {fileID: 9048947657044004208}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9048947657044004209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048947657044004223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9048947657044004208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048947657044004223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0ec1c664928be4e91ea026fd6f0bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _skySpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _groundPath:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _phases:
+  - TimeToSpawn: 0
+    Type: 1
+    Amount: 3
+  - TimeToSpawn: 5
+    Type: 2
+    Amount: 2
+  - TimeToSpawn: 1
+    Type: 1
+    Amount: 1
+  - TimeToSpawn: 2
+    Type: 2
+    Amount: 1
+  - TimeToSpawn: 2
+    Type: 0
+    Amount: 0
+  _enemyPool: {fileID: 0}
+  _bulletPool: {fileID: 0}
+  _groundEnemyPrefab: {fileID: 957494463311306030, guid: 3a917822ddaddb542a6852ececf21554,
+    type: 3}
+  _skyEnemyPrefab: {fileID: 6930760030269376791, guid: 3732c70133a6a2849ba10d3d0d6bafdc,
+    type: 3}
+  _canvas: {fileID: 0}
+  Throne: {fileID: 0}
