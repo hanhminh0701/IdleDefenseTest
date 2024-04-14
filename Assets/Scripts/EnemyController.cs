@@ -43,7 +43,6 @@ public class EnemyController : MonoBehaviour
     {
         if (_isDead) return;
         Move();
-        if (Input.GetMouseButtonDown(1)) Die();
     }
 
     public void Init()
